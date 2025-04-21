@@ -106,10 +106,9 @@ def fetch_conversations():
         conversations_list = []
         for conver in conversations_dump['channels']:
             if conver['is_im']:
-                #print('!!!conver=%s' % (conver))
                 conversations_dict[conver['id']] = {
-                    'user_id': conver['user'], 
-                    'user_name': users[conver['user']]['name']
+                    'user_id': conver.get('user'), 
+                    'user_name': users.get(conver.get('user'), {}).get('name')
                 }
                 conversations_list.append(conver['id'])
         return (conversations_dict, conversations_list)
